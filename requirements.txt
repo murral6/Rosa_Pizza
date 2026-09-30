@@ -1,0 +1,2 @@
+streamlit>=1.40.0
+rosa-starter @ git+https://github.com/zhouy185/rosa-starter.git

@@ -1,0 +1,4 @@
+- select a zone and a time block from dropdown menus
+- set the range of promised times to try
+- adjust the profit margin per order, estimated churn per late order, and the refund cost per late order
+- display the recommended promised time for the selected zone and time block after clicking on a button.
