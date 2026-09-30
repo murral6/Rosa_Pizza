@@ -1,7 +1,7 @@
 import streamlit as st
 from starter import COSTS, PROMISE, TIME_BLOCKS, ZONES, delivery_times
 
-
+# my function to calculate the cost per late order, written to answer 2a) of assignment
 def cost_per_late_order (COSTS):
   refund =  COSTS['refund']
   churn = COSTS['churn_orders']
@@ -10,25 +10,26 @@ def cost_per_late_order (COSTS):
   sum = refund + churn*profit
   return sum
 
-
+# my function to find the best promise, written to answer 2b) of assignment
+# copilot sets a  seed for the random number generator to make the results reproducible
 new_promises = range(10,70,5)
 
 def best_promise(zone, time_block, new_promises, COSTS):
-    best_profit = None
+    best_profit = 0
     best_result = None
 
-    for promise in new_promises:
-        actual_times = delivery_times(zone, time_block, promise, seed=42)
+    for i in new_promises:
+        actual_times = delivery_times(zone, time_block, i, seed=42)
         num_of_orders = len(actual_times)
-        num_of_late_orders = (actual_times > promise).sum()
+        num_of_late_orders = (actual_times > i).sum()
         profit = num_of_orders * COSTS["margin"]
         late_costs = num_of_late_orders * cost_per_late_order(COSTS)
         net_profit = profit - late_costs
 
-        if best_profit is None or net_profit > best_profit:
+        if net_profit > best_profit:
             best_profit = net_profit
             best_result = {
-                "promise": promise,
+                "promise": i,
                 "orders": num_of_orders,
                 "late_orders": num_of_late_orders,
                 "average_delivery": actual_times.mean() if num_of_orders else 0,
