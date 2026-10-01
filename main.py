@@ -26,6 +26,7 @@ def best_promise(zone, time_block, new_promises, COSTS):
         late_costs = num_of_late_orders * cost_per_late_order(COSTS)
         net_profit = profit - late_costs
 
+        # copilot expanding on my initial code 
         if net_profit > best_profit:
             best_profit = net_profit
             best_result = {
